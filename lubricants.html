@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ભારત પેટ્રોલિયમ્સ સર્વિસ સેંટર </title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bp-red: #c8102e;
+      --bp-gold: #f5a623;
+      --bp-dark: #0d0d1a;
+      --bp-navy: #0a1628;
+      --bp-card: #13213a;
+      --bp-card2: #1a2d4a;
+      --bp-border: #1e3a5f;
+      --bp-text: #e8edf5;
+      --bp-muted: #8fa8c8;
+      --bp-accent: #00c6ff;
+      --shadow: 0 8px 32px rgba(0,0,0,0.45);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans Gujarati', sans-serif;
+      background: var(--bp-dark);
+      color: var(--bp-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(200,16,46,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(0,198,255,0.07) 0%, transparent 55%),
+        linear-gradient(160deg, #0d0d1a 0%, #091524 50%, #0d0d1a 100%);
+      pointer-events: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative; z-index: 10;
+      background: linear-gradient(135deg, #0a1220 0%, #0d1e35 100%);
+      border-bottom: 2px solid var(--bp-red);
+      box-shadow: 0 4px 30px rgba(200,16,46,0.3);
+    }
+
+    .header-top {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1400px; margin: 0 auto;
+      padding: 18px 28px;
+      gap: 20px;
+    }
+
+    .logo-area {
+      display: flex; align-items: center; gap: 18px;
+    }
+
+    .logo-circle {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, var(--bp-red), #8b0020);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px; font-weight: 700;
+      color: #fff;
+      box-shadow: 0 0 24px rgba(200,16,46,0.5);
+      flex-shrink: 0;
+      border: 2px solid rgba(245,166,35,0.4);
+    }
+
+    .logo-text h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px; font-weight: 700; letter-spacing: 1px;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .logo-text h1 span { color: var(--bp-gold); }
+    .logo-text p {
+      font-size: 13px; color: var(--bp-muted);
+      font-family: 'Rajdhani', sans-serif; letter-spacing: 2px;
+      text-transform: uppercase; margin-top: 2px;
+    }
+
+    .header-badge {
+      background: linear-gradient(135deg, var(--bp-gold), #c47f00);
+      color: #000; font-weight: 700; font-size: 12px;
+      padding: 6px 16px; border-radius: 20px;
+      font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;
+      text-transform: uppercase; flex-shrink: 0;
+    }
+
+    .header-title-bar {
+      background: linear-gradient(90deg, var(--bp-red) 0%, #8b0020 100%);
+      text-align: center;
+      padding: 12px 20px;
+    }
+    .header-title-bar h2 {
+      font-size: clamp(18px, 3vw, 26px); font-weight: 700;
+      letter-spacing: 2px; color: #fff;
+    }
+
+    /* ── NAV TABS ── */
+    .nav-tabs {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,18,32,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bp-border);
+      padding: 0 20px;
+      overflow-x: auto; white-space: nowrap;
+      display: flex; gap: 4px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 22px;
+      background: none; border: none;
+      color: var(--bp-muted);
+      font-family: 'Noto Sans Gujarati', sans-serif;
+      font-size: 14px; font-weight: 500;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+    .tab-btn .tab-icon { font-size: 18px; }
+    .tab-btn:hover { color: var(--bp-text); }
+    .tab-btn.active {
+      color: var(--bp-gold);
+      border-bottom-color: var(--bp-gold);
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative; z-index: 1;
+      max-width: 1400px; margin: 0 auto;
+      padding: 36px 24px 60px;
+    }
+
+    /* ── SECTION ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--bp-red), #700015);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 16px rgba(200,16,46,0.35);
+    }
+    .section-info h3 {
+      font-size: clamp(20px, 3vw, 28px); font-weight: 700;
+      color: #fff; line-height: 1.2;
+    }
+    .section-info p { color: var(--bp-muted); font-size: 13px; margin-top: 2px; }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    /* ── PRODUCT CARD ── */
+    .card {
+      background: linear-gradient(160deg, var(--bp-card) 0%, var(--bp-card2) 100%);
+      border: 1px solid var(--bp-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      cursor: default;
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--bp-red), var(--bp-gold));
+      opacity: 0; transition: opacity 0.28s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,166,35,0.2);
+      border-color: rgba(245,166,35,0.3);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-img-wrap {
+      background: linear-gradient(160deg, #0f1e33, #162840);
+      display: flex; align-items: center; justify-content: center;
+      height: 200px;
+      padding: 20px;
+      position: relative; overflow: hidden;
+    }
+    .card-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 120%, rgba(200,16,46,0.08), transparent 70%);
+    }
+    .card-img-wrap img {
+      max-width: 100%; max-height: 160px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+      transition: transform 0.3s ease;
+      position: relative; z-index: 1;
+    }
+    .card:hover .card-img-wrap img { transform: scale(1.07); }
+
+    /* Fallback placeholder when image not found */
+    .card-img-wrap .img-placeholder {
+      width: 110px; height: 150px;
+      background: linear-gradient(160deg, #1e3a5f, #0d2240);
+      border-radius: 10px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--bp-border);
+    }
+    .img-placeholder .oil-icon { font-size: 36px; }
+    .img-placeholder span { font-size: 10px; color: var(--bp-muted); }
+
+    .card-body {
+      padding: 16px 18px 20px;
+    }
+    .card-name {
+      font-size: 15px; font-weight: 700;
+      color: #fff; line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .card-spec {
+      font-size: 12px; color: var(--bp-accent);
+      font-family: 'Rajdhani', sans-serif; font-weight: 600;
+      letter-spacing: 0.5px; margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 12px; color: var(--bp-muted);
+      line-height: 1.5;
+    }
+    .card-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(200,16,46,0.15);
+      border: 1px solid rgba(200,16,46,0.35);
+      color: #ff6b7a; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+      font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      background: rgba(10,18,32,0.9);
+      border-top: 1px solid var(--bp-border);
+      padding: 24px;
+      color: var(--bp-muted); font-size: 13px;
+    }
+    footer strong { color: var(--bp-gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .header-top { flex-wrap: wrap; justify-content: center; text-align: center; }
+      .logo-area { flex-direction: column; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+      .card-img-wrap { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-top">
+            <h1><span> ભારત પેટ્રોલિયમ્સ સર્વિસ સેન્ટર </span></h1>
+        <p>Bharat Petroleums Service Centre</p>
+      </div>
+    </div>
+    <div class="header-badge">⭐ ISP &amp; ISO cer­ti­fied</div>
+  </div>
+  <div class="header-title-bar">
+    <h2>🛢️ લુબ્રીકન્ટસ — સંપૂર્ણ સૂચિ</h2>
+  </div>
+</header>
+
+<!-- ══ NAVIGATION TABS ══ -->
+<nav class="nav-tabs" role="tablist">
+  <button class="tab-btn active" onclick="showTab('two-wheeler')" role="tab">
+    <span class="tab-icon">🏍️</span> 2W વાહન ઓઈલ
+  </button>
+  <button class="tab-btn" onclick="showTab('cars')" role="tab">
+    <span class="tab-icon">🚗</span> કાર ઓઈલ
+  </button>
+  <button class="tab-btn" onclick="showTab('diesel')" role="tab">
+    <span class="tab-icon">🚛</span> ડીઝલ એન્જિન ઓઈલ
+  </button>
+  <button class="tab-btn" onclick="showTab('tractor')" role="tab">
+    <span class="tab-icon">🚜</span> ટ્રેક્ટર ઓઈલ
+  </button>
+  <button class="tab-btn" onclick="showTab('other')" role="tab">
+    <span class="tab-icon">⚙️</span> અન્ય ઓઈલ
+  </button>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main>
+
+  <!-- ── 2-WHEELER OIL ── -->
+  <section id="two-wheeler" class="section active">
+    <div class="section-header">
+      <div class="section-icon">🏍️</div>
+      <div class="section-info">
+        <h3>2W વાહન ઓઈલ</h3>
+        <p>Two-Wheeler Engine Oils — High Performance Motorcycle &amp; Scooter Lubricants</p>
+      </div>
+    </div>
+    <div class="product-grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/4T-SN-10W40-JASO-MA2.png" alt="4T SN 10W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">4T SN 10W40 JASO MA2</div>
+          <div class="card-spec">10W-40 | SN | JASO MA2</div>
+          <div class="card-desc">ઉચ્ચ-પ્રદર્શન 4-સ્ટ્રોક મોટરસાઇકલ એન્જિન ઓઈલ. ઉત્કૃષ્ટ ગ્રીષ્મ સ્થિરતા.</div>
+          <span class="card-badge">4-Stroke</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/4T-SN-20W40-JASO-MA2.png" alt="4T SN 20W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">4T SN 20W40 JASO MA2</div>
+          <div class="card-spec">20W-40 | SN | JASO MA2</div>
+          <div class="card-desc">ભારતીય આબોહવા માટે ખાસ ઘડાયેલ. ક્લચ પ્રોટેક્શન સાથે.</div>
+          <span class="card-badge">4-Stroke</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/Auric-20W40-SM-JASO-MA2.png" alt="Auric 20W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Auric 20W40 SM JASO MA2</div>
+          <div class="card-spec">20W-40 | SM | JASO MA2</div>
+          <div class="card-desc">પ્રીમિયમ Auric ટેક્નોલૉજી સાથેનું ઓઈલ. એન્જિન ઘસારો ઓછો કરે.</div>
+          <span class="card-badge">Premium</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/Power-4T-20W40 .png" alt="Power 4T 20W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Power 4T 20W40</div>
+          <div class="card-spec">20W-40 | 4-Stroke</div>
+          <div class="card-desc">ઊર્જા-સક્ષમ ફોર્મ્યુલા. ઈંધણ બચત અને એન્જિન આયુ વધારે.</div>
+          <span class="card-badge">4-Stroke</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/Super-4T-20W50.png" alt="Super 4T 20W50" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Super 4T 20W50</div>
+          <div class="card-spec">20W-50 | 4-Stroke</div>
+          <div class="card-desc">ભારે ઉપયોગ માટેનું જાડું ઓઈલ. ઊંચી ગ્રેડ વિસ્કૉસિટી.</div>
+          <span class="card-badge">Super Grade</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/Ultra-4T-10W30.png" alt="Ultra 4T 10W30" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Ultra 4T 10W30</div>
+          <div class="card-spec">10W-30 | 4-Stroke</div>
+          <div class="card-desc">ઠંડા વાતાવરણ માટે ઉત્કૃષ્ટ. ઝડપી સ્ટાર્ટ-અપ પ્રોટેક્શન.</div>
+          <span class="card-badge">Ultra Series</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/Ultra-4T-125CC-SL.png" alt="Ultra 4T 125CC SL" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Ultra 4T 125CC SL</div>
+          <div class="card-spec">SL Grade | 125CC</div>
+          <div class="card-desc">100–125CC સ્કૂટર/બાઇક માટે ખાસ. ઓછા ઉત્સર્જન સાથે.</div>
+          <span class="card-badge">125CC Special</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="2-wheelers-oil/Ultra-4T-350CCHD-API.png" alt="Ultra 4T 350CC HD API" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Ultra 4T 350CC HD API</div>
+          <div class="card-spec">API Grade | 350CC HD</div>
+          <div class="card-desc">350CC+ ભારી મોટરસાઇકલ માટે. ઉચ્ચ-ઓક્ટેન એન્જિન સ્નેહ.</div>
+          <span class="card-badge">Heavy Duty</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CARS OIL ── -->
+  <section id="cars" class="section">
+    <div class="section-header">
+      <div class="section-icon">🚗</div>
+      <div class="section-info">
+        <h3>કાર એન્જિન ઓઈલ</h3>
+        <p>Car Engine Oils — Petrol &amp; CNG Vehicle Lubricants</p>
+      </div>
+    </div>
+    <div class="product-grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Cars_Oil/CNG-API-SF-20W50.png" alt="CNG API SF 20W50" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CNG API SF 20W50</div>
+          <div class="card-spec">20W-50 | API SF | CNG</div>
+          <div class="card-desc">CNG વાહનો માટે ખાસ ઘડાયેલ. ઉચ્ચ-ઓક્સીડેશન સ્થિરતા.</div>
+          <span class="card-badge">CNG Special</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Cars_Oil/SG-CF4-20W50.png" alt="SG CF4 20W50" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">SG/CF4 20W50</div>
+          <div class="card-spec">20W-50 | SG/CF4</div>
+          <div class="card-desc">ડ્યૂઅલ-ગ્રેડ ઓઈલ. પેટ્રોલ અને ડીઝલ બંને કારો માટે.</div>
+          <span class="card-badge">Multi-Grade</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Cars_Oil/SN-CF-5W30.png" alt="SN CF 5W30" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">SN/CF 5W30</div>
+          <div class="card-spec">5W-30 | SN/CF | Fully Synthetic</div>
+          <div class="card-desc">ફૂલ-સિન્થેટિક ઓઈલ. ઠંડી સ્ટાર્ટ અને ઊંચી ઈંધણ દક્ષતા.</div>
+          <span class="card-badge">Fully Synthetic</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Cars_Oil/SN-CF-5W40.png" alt="SN CF 5W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">SN/CF 5W40</div>
+          <div class="card-spec">5W-40 | SN/CF | Full Synthetic</div>
+          <div class="card-desc">આધુનિક ટર્બો-ચાર્જ્ડ એન્જિન માટે. ઉચ્ચ-તાપમાન સ્નેહ.</div>
+          <span class="card-badge">Turbo Compatible</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DIESEL ENGINE OIL ── -->
+  <section id="diesel" class="section">
+    <div class="section-header">
+      <div class="section-icon">🚛</div>
+      <div class="section-info">
+        <h3>ડીઝલ એન્જિન ઓઈલ</h3>
+        <p>Diesel Engine Oils — Commercial &amp; Heavy Vehicle Lubricants</p>
+      </div>
+    </div>
+    <div class="product-grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/CF4-20W40-FG.png" alt="CF4 20W40 FG" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CF4 20W40 FG</div>
+          <div class="card-spec">20W-40 | CF4 | Fleet Grade</div>
+          <div class="card-desc">ફ્લીટ-ગ્રેડ ડીઝલ ઓઈલ. ઉચ્ચ-ભાર ટ્રાન્સપોર્ટ વ્હીકલ્સ માટે.</div>
+          <span class="card-badge">Fleet Grade</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/CI4-Plus-15W40.png" alt="CI4 Plus 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CI4 Plus 15W40</div>
+          <div class="card-spec">15W-40 | CI-4 Plus</div>
+          <div class="card-desc">EGR-સજ્જ ટ્રક-બસ એન્જિન. ઉત્કૃષ્ટ ઘસારો-નિયંત્રણ.</div>
+          <span class="card-badge">CI-4 Plus</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/CIX-CI4-Plus-15W40.png" alt="CIX CI4 Plus 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CIX CI4 Plus 15W40</div>
+          <div class="card-spec">15W-40 | CI-4 Plus | Extra</div>
+          <div class="card-desc">CIX ટેક્નૉલૉજી — લાંબા ડ્રેઇન ઇન્ટર્વલ. ઓઈલ ટકાઉ.</div>
+          <span class="card-badge">Extended Drain</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/Harit-Shakti-CF-20W40.png" alt="Harit Shakti CF 20W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Green Power CF 20W40</div>
+          <div class="card-spec">20W-40 | CF | Eco Friendly</div>
+          <div class="card-desc">પર્યાવરણ-મૈત્રી ફોર્મ્યુલ. ઓછું ઉત્સર્જન, વધુ શક્તિ.</div>
+          <span class="card-badge">ઇકો-ફ્રેન્ડ્લી</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/Supra-CF4-15W40.png" alt="Supra CF4 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Supra CF4 15W40</div>
+          <div class="card-spec">15W-40 | CF-4</div>
+          <div class="card-desc">Supra ગ્રેડ — ભારે વ્યવસાયિક ડીઝલ વ્હીકલ્સ. ઉચ્ચ-ટ્રોક ઇન્ટિગ્રિટી.</div>
+          <span class="card-badge">Supra Grade</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/Turbo-Shakti-CF4-20W40.png" alt="Turbo Shakti CF4 20W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Turbo Power CF4 20W40</div>
+          <div class="card-spec">20W-40 | CF-4 | Turbocharged</div>
+          <div class="card-desc">ટર્બો-ચાર્જ્ડ ડીઝલ એન્જિન. ઉચ્ચ-ઓક્સીડેશન-સ્થિર ઓઈલ.</div>
+          <span class="card-badge">Turbo</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Diesel_Engine_Oil/Ultra-CH4-DH1-15W40.png" alt="Ultra CH4 DH1 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Ultra CH4/DH-1 15W40</div>
+          <div class="card-spec">15W-40 | CH-4/DH-1</div>
+          <div class="card-desc">JASO DH-1 સર્ટિ. ભારે-ડ્યૂટી ઓન/ઑફ-રોડ ડીઝલ ઉપયોગ.</div>
+          <span class="card-badge">DH-1 Certified</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TRACTOR OIL ── -->
+  <section id="tractor" class="section">
+    <div class="section-header">
+      <div class="section-icon">🚜</div>
+      <div class="section-info">
+        <h3>ટ્રેક્ટર ઓઈલ</h3>
+        <p>Tractor Engine Oils — Agricultural Vehicle Lubricants</p>
+      </div>
+    </div>
+    <div class="product-grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Tractor_Oil/MAX-CH4-15W40.png" alt="MAX CH4 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">MAX CH4 15W40</div>
+          <div class="card-spec">15W-40 | CH-4</div>
+          <div class="card-desc">ખેત-ટ્રેક્ટર માટે ઉત્કૃષ્ટ. ઉચ્ચ-ભાર PTO સ્નેહ.</div>
+          <span class="card-badge">Agricultural</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Tractor_Oil/Super-Power-CI4-Plus-15W40.png" alt="Super Power CI4 Plus 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Super Power CI4 Plus 15W40</div>
+          <div class="card-spec">15W-40 | CI-4 Plus</div>
+          <div class="card-desc">CI4 Plus ટ્રેક્ટર. ઇન્ટર-કૂલ્ડ ટ્રેક્ટર એન્જિન માટે ઉત્તમ.</div>
+          <span class="card-badge">Super Power</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Tractor_Oil/Tractor-MAX-CF4-15W40.png" alt="Tractor MAX CF4 15W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Tractor MAX CF4 15W40</div>
+          <div class="card-spec">15W-40 | CF-4</div>
+          <div class="card-desc">ટ્રેક્ટર-ખાસ ઓઈલ. ઊંચી ધૂળ-ભરેલ ખેત-ઉપયોગ.</div>
+          <span class="card-badge">Tractor MAX</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Tractor_Oil/Turbo-Shakti-CF4-20W40.png" alt="Turbo Shakti CF4 20W40" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>BP OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Turbo Power CF4 20W40</div>
+          <div class="card-spec">20W-40 | CF-4 | Turbocharged</div>
+          <div class="card-desc">ટર્બો-ટ્રેક્ટર ઉપયોગ. ઉચ્ચ-ક્ષમતા ખેત-ઉત્પાદકતા.</div>
+          <span class="card-badge">Turbo Tractor</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── OTHER OILS ── -->
+  <section id="other" class="section">
+    <div class="section-header">
+      <div class="section-icon">⚙️</div>
+      <div class="section-info">
+        <h3>અન્ય ઓઈલ &amp; લ્યુબ્રિકન્ટ</h3>
+        <p>Gear Oils, Transmission Fluids, Grease, Coolant &amp; Specialty Lubricants</p>
+      </div>
+    </div>
+    <div class="product-grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Auto-Coolant.png" alt="Auto Coolant" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🧊</span><span>COOLANT</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Auto Coolant</div>
+          <div class="card-spec">Radiator Coolant | Anti-Freeze</div>
+          <div class="card-desc">ઊંચી-ગ્રેડ એન્ટી-ફ્રીઝ. એન્જિન ઠંડક અને કોરોઝન-રક્ષણ.</div>
+          <span class="card-badge">Coolant</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/CNG-SAE-20W50-API-SF.png" alt="CNG SAE 20W50 API SF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🛢️</span><span>CNG OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CNG SAE 20W50 API SF</div>
+          <div class="card-spec">20W-50 | API SF | CNG</div>
+          <div class="card-desc">CNG ઓટો-રિક્ષા અને CNG 3-વ્હીલર. ઊર્જા-સક્ષમ ફ્ોર્મ્યૂલ.</div>
+          <span class="card-badge">CNG</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Shock-Absorber-AB(FF + PC).png" alt="Shock Absorber" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">⚡</span><span>SHOCK OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Shock Absorber Oil (FF + PC)</div>
+          <div class="card-spec">Fork Fluid + PC Grade</div>
+          <div class="card-desc">ફ્રન્ટ-ફોર્ક અને ઉપરોક્ત PC ગ્રેડ. ઉત્કૃષ્ટ સસ્પેન્શન ઓઈલ.</div>
+          <span class="card-badge">Suspension</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-ATF-TASA-TQ-Transmission-oil.png" alt="ATF TASA TQ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🔧</span><span>ATF</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil ATF TASA TQ</div>
+          <div class="card-spec">ATF | TASA | Transmission</div>
+          <div class="card-desc">ઓટોમેટિક ટ્રાન્સમિશન ફ્લૂઇડ. TQ ગ્રેડ — ઓટો-ગિયર.</div>
+          <span class="card-badge">ATF</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-Auto-Gear-GL4-80W90.png" alt="Auto Gear GL4 80W90" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">⚙️</span><span>GEAR OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil Auto Gear GL4 80W90</div>
+          <div class="card-spec">80W-90 | GL-4</div>
+          <div class="card-desc">GL-4 ગ્રેડ ગિયર-ઓઈલ. મેન્યૂઅલ ટ્રાન્સ-મિશન અને ઍક્સ.</div>
+          <span class="card-badge">GL-4</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-Auto-Gear-Oil-75W90-GL4.png" alt="Auto Gear 75W90 GL4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">⚙️</span><span>GEAR OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil Auto Gear 75W90 GL4</div>
+          <div class="card-spec">75W-90 | GL-4 | Semi-Synthetic</div>
+          <div class="card-desc">Semi-syn. GL-4 ઓઈલ. ઠંડા-ફ્લો સ્ટ્રિન્ગ કારો.</div>
+          <span class="card-badge">Semi-Synthetic</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-Auto-Gear-Oil-85W140-GL5.png" alt="Auto Gear 85W140 GL5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">⚙️</span><span>GEAR OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil Auto Gear 85W140 GL5</div>
+          <div class="card-spec">85W-140 | GL-5 | Heavy Duty</div>
+          <div class="card-desc">ભારે-ડ્યૂટી ઍક્સ-ગ્રીઝ. GL-5 ઉચ્ચ-ભાર ગ્રેડ.</div>
+          <span class="card-badge">GL-5 HD</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-Auto-Gear-Oil-EP-140-GL4.png" alt="EP 140 GL4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">⚙️</span><span>GEAR OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil Auto Gear EP 140 GL4</div>
+          <div class="card-spec">EP 140 | GL-4</div>
+          <div class="card-desc">Extreme Pressure ગ્રેડ. ભારે ગ્રીઝ-ઉત્પાદ ઇ.પી. ગ્રેડ.</div>
+          <span class="card-badge">EP Grade</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-Auto-Gear-Oil-EP-90-GL4.png" alt="EP 90 GL4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">⚙️</span><span>GEAR OIL</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil Auto Gear EP 90 GL4</div>
+          <div class="card-spec">EP 90 | GL-4</div>
+          <div class="card-desc">SAE 90 EP ગ્રેડ. ગ્રામ્ય ટ્રાન્સ-ઍક્સ અને ડ્રાઇવ-ઍક્સ.</div>
+          <span class="card-badge">EP-90</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-Multi-Grease-AP3.png" alt="Multi Grease AP3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🔩</span><span>GREASE</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil Multi Grease AP3</div>
+          <div class="card-spec">NLGI AP3 | Multi-Purpose</div>
+          <div class="card-desc">AP3 ગ્રેડ મલ્ટી-ગ્રીઝ. ઉચ્ચ-ઘટ-ઉષ્ણ ગ્રીઝ, ઘર્ષણ-રક્ષણ.</div>
+          <span class="card-badge">Grease AP3</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="Other_Oils/Universal-Goldoil-UTTO-Transmission-oil.png" alt="UTTO Transmission Oil" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="img-placeholder" style="display:none"><span class="oil-icon">🔧</span><span>UTTO</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Universal Goldoil UTTO Transmission Oil</div>
+          <div class="card-spec">UTTO | Universal Tractor Oil</div>
+          <div class="card-desc">Universal Tractor Transmission Oil. ટ્રેક્ટર ગ્રીઝ, ટ્રાન્સ. અને PTO.</div>
+          <span class="card-badge">UTTO</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>
+    <strong>ભારત પેટ્રોલિયમ્સ સર્વિસ સેંટર</strong> &nbsp;|&nbsp;
+  </p>
+  <p style="margin-top:6px; font-size:11px;">
+    તમામ ઉત્પાદનો BIS / ISI / API ધોરણ અનુસાર સ.ટ. ભારત સ.ટ. ✔
+  </p>
+</footer>
+
+<script>
+  function showTab(id) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    // Show selected
+    document.getElementById(id).classList.add('active');
+
+    // Activate correct button
+    const btns = document.querySelectorAll('.tab-btn');
+    const map = { 'two-wheeler': 0, 'cars': 1, 'diesel': 2, 'tractor': 3, 'other': 4 };
+    btns[map[id]].classList.add('active');
+
+    // Scroll tab into view
+    btns[map[id]].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

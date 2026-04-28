@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ભારત પેટ્રોલિયમ્સ સર્વિસ સેન્ટર – ગોંડલ રોડ, રાજકોટ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --red:       #E22126;
+  --darkred:   #b01a1e;
+  --black:     #111111;
+  --gray-900:  #1a1a1a;
+  --gray-700:  #374151;
+  --gray-500:  #6b7280;
+  --gray-300:  #d1d5db;
+  --gray-100:  #f4f5f7;
+  --white:     #ffffff;
+  --border:    #e2e4e8;
+  --radius:    8px;
+  --radius-lg: 12px;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans Gujarati', sans-serif;
+  background: var(--white);
+  color: var(--gray-900);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ── LAYOUT ── */
+.page { max-width: 960px; margin: 0 auto; }
+.section { padding: 0 24px; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--red);
+  padding: 32px 28px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--darkred);
+}
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  color: #ffe0e0;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.hero h1 {
+  font-size: clamp(20px, 4.5vw, 34px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.hero h1 small {
+  display: block;
+  font-size: clamp(11px, 2vw, 14px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.78);
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+}
+.hero-pills {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  padding-top: 2px;
+}
+.hero-pill {
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  padding: 5px 13px;
+  font-size: 12px;
+  color: var(--white);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.hero-tags {
+  max-width: 960px;
+  margin: 16px auto 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.14);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.92);
+}
+
+/* ── NAV ── */
+.nav-bar {
+  background: var(--black);
+  border-bottom: 1px solid #2a2a2a;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-inner a {
+  padding: 13px 18px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-inner a:hover {
+  color: var(--white);
+  border-bottom-color: var(--red);
+}
+
+/* ── SECTION HEADERS ── */
+.sec-wrap { padding: 36px 24px 0; }
+.sec-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.sec-head {
+  font-size: clamp(17px, 3vw, 21px);
+  font-weight: 700;
+  color: var(--gray-900);
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid var(--border);
+  margin-bottom: 20px;
+}
+
+/* ── PROBLEM CARDS ── */
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.pcard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.pcard:hover {
+  border-color: var(--red);
+  box-shadow: 0 4px 16px rgba(226,33,38,0.12);
+  transform: translateY(-2px);
+}
+.pcard-img {
+  background: var(--gray-100);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+}
+.pcard-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+}
+.pcard-img img { width: 100%; height: 100%; object-fit: contain; }
+.pcard-lbl {
+  padding: 9px 10px 11px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gray-900);
+  line-height: 1.45;
+}
+
+/* ── INFO STRIP ── */
+.info-strip {
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 18px 20px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--gray-700);
+}
+.info-strip strong { color: var(--red); font-weight: 600; }
+
+/* ── SERVICE/PRODUCTS CARDS ── */
+.sgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+}
+.scard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.scard:hover {
+  border-color: var(--gray-300);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+  transform: translateY(-2px);
+}
+.scard-img {
+  background: var(--gray-100);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.scard-img img { width: 100%; height: 100%; object-fit: contain; }
+.scard-lbl {
+  padding: 8px 10px 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gray-900);
+  line-height: 1.45;
+  border-top: 1px solid var(--border);
+}
+
+/* ── CERTIFICATES SECTION ── */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.cert-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.cert-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 4px 14px rgba(226,33,38,0.1);
+}
+.cert-icon-wrap {
+  background: var(--gray-100);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.cert-icon-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+}
+.cert-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--red);
+}
+.cert-info { padding: 12px 14px 14px; }
+.cert-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.cert-type {
+  display: inline-block;
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+.cert-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans Gujarati', sans-serif;
+  transition: background .2s;
+}
+.cert-open-btn:hover { background: var(--darkred); }
+
+/* ── GPAY SECTION ── */
+.gpay-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.gpay-qr {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 180px;
+}
+.gpay-qr img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: var(--white);
+  padding: 10px;
+}
+.gpay-qr-label {
+  background: var(--gray-100);
+  border-top: 1px solid var(--border);
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--gray-700);
+}
+.bank-details {
+  flex: 1;
+  min-width: 220px;
+}
+.bank-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.bank-row:last-child { border-bottom: none; }
+.bank-key {
+  font-size: 12px;
+  color: var(--gray-500);
+  font-weight: 500;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+.bank-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-900);
+  word-break: break-all;
+}
+
+/* ── INDUSTRIAL CUSTOMERS ── */
+.cust-strip {
+  background: var(--gray-100);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cust-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+.cust-sub {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+.cust-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--gray-900);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans Gujarati', sans-serif;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.cust-btn:hover { background: var(--red); }
+
+/* ── CONTACT ── */
+.contact-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.contact-hd {
+  background: var(--black);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.contact-hd h3 { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.4; }
+.contact-hd .est {
+  font-size: 12px;
+  color: #9ca3af;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.contact-bd {
+  padding: 22px;
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.grp-lbl {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 10px;
+}
+.addr { font-size: 14px; line-height: 1.9; color: var(--gray-700); }
+.phones { display: flex; flex-direction: column; gap: 9px; }
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 13px;
+  background: var(--gray-100);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+.ph-icon {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ph-icon svg { width: 14px; height: 14px; fill: var(--white); }
+.ph-num { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.ph-name { font-size: 11.5px; color: var(--gray-500); }
+.contact-ft {
+  background: var(--gray-100);
+  border-top: 1px solid var(--border);
+  padding: 14px 22px;
+  font-size: 13.5px;
+  color: var(--gray-700);
+  line-height: 1.8;
+}
+.contact-ft strong { color: var(--gray-900); font-weight: 700; }
+
+/* ── MAP LINK ── */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px dashed var(--red);
+}
+.map-link:hover { opacity: 0.75; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  margin-top: 48px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.f-brand { font-size: 13px; font-weight: 700; color: var(--white); }
+.f-meta { font-size: 12px; color: #6b7280; }
+.dot {
+  display: inline-block;
+  width: 4px; height: 4px;
+  background: var(--red);
+  border-radius: 50%;
+  margin: 0 7px;
+  vertical-align: middle;
+}
+.viewer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+.viewer img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.viewer.active {
+  display: flex;
+}
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 0 24px; }
+
+/* ── FLASH MESSAGE ── */
+#flash-wrap {
+  max-width: 960px;
+  margin: 18px auto 0;
+  padding: 0 24px;
+  animation: flashIn 0.5s ease;
+}
+@keyframes flashIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#flash-box {
+  background: linear-gradient(90deg, #fff5f5, #fff0f0);
+  border: 1px solid #f5c6c6;
+  border-left: 4px solid var(--red);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(226,33,38,0.08);
+}
+#flash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+#flash-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#flash-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+#flash-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+#flash-close {
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--gray-500);
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+#flash-close:hover { color: var(--red); background: rgba(226,33,38,0.08); }
+#flash-msg {
+  font-size: 20.5px;
+  line-height: 1.85;
+  color: var(--gray-700);
+  white-space: pre-line;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+  transition: opacity 0.3s;
+  scrollbar-width: thin;
+  scrollbar-color: #f5c6c6 transparent;
+}
+#flash-msg::-webkit-scrollbar { width: 3px; }
+#flash-msg::-webkit-scrollbar-thumb { background: #f5c6c6; border-radius: 3px; }
+#flash-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid #f5c6c6;
+}
+#flash-dots { display: flex; gap: 5px; align-items: center; }
+.fdot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #f5c6c6;
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+.fdot.active { background: var(--red); transform: scale(1.3); }
+#flash-counter { font-size: 11px; color: var(--gray-500); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .pgrid, .sgrid { grid-template-columns: repeat(3, 1fr); gap: 9px; }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-bd { grid-template-columns: 1fr; }
+  .hero-pills { align-items: flex-start; }
+  .hero-inner { flex-direction: column; }
+  .gpay-wrap { flex-direction: column; }
+  .gpay-qr { width: 100%; max-width: 200px; }
+  .bank-key { min-width: 110px; }
+}
+@media (max-width: 360px) {
+  .pgrid, .sgrid { grid-template-columns: repeat(2, 1fr); }
+  .cert-grid { grid-template-columns: 1fr; }
+}
+.blink-smooth {
+  animation: blinkSmooth 1.5s infinite;
+}
+
+@keyframes blinkSmooth {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">બોશ ઓથોરાઇઝ્ડ વર્કશોપ</div>
+      <h1>ભારત પેટ્રોલિયમ્સ સર્વિસ સેન્ટર
+        <small>ગોંડલ રોડ, રાજકોટ – ૩૬૦૦૦૨ &nbsp;|&nbsp; ૫૦+ વર્ષ નો અનુભવ</small>
+      </h1>
+    </div>
+    <div class="hero-pills">
+      <div class="hero-pill">📞 ૯૮૯૮૫ ૦૦૬૪૩</div>
+      <div class="hero-pill">📞 ૯૨૨૮૨ ૧૯૯૮૭</div>
+      <div class="hero-pill">📞 ૯૪૨૬૭ ૮૫૨૫૪</div>
+    </div>
+  </div>
+  <div class="hero-tags">
+    <span class="hero-tag">ફ્યુઈલ ઈન્જેક્શન નિષ્ણાત</span>
+    <span class="hero-tag">ડીઝલ પંપ રીપેર</span>
+    <span class="hero-tag">ઇન્જેક્ટર ટેસ્ટિંગ</span>
+    <span class="hero-tag">ઓરિજિનલ બોશ પાર્ટ્સ</span>
+    <span class="hero-tag">ઔદ્યોગિક ગ્રાહકો</span>
+    <span class="hero-tag">જીએસટી નોંધાયેલ</span>
+    <span class="hero-tag">ઉદ્યોગ આધાર</span>
+  </div>
+</header>
+
+<!-- ══ NAV ══ -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="lubricants.html">લુબ્રીકન્ટસ</a>
+    <a href="final_products.html">પ્રોડક્ટ્સ</a>
+    <a href="#certificates">પ્રમાણપત્રો</a>
+    <a href="#payment">ચુકવણી</a>
+    <a href="#contact">સંપર્ક</a>
+  </div>
+</nav>
+
+<!-- ══ FLASH MESSAGE ══ -->
+<div id="flash-wrap">
+  <div id="flash-box">
+    <div id="flash-header">
+      <div id="flash-title-row">
+        <span id="flash-icon">📢</span>
+        <span id="flash-label">અગત્યની સૂચના</span>
+      </div>
+      <span id="flash-close" onclick="document.getElementById('flash-wrap').style.display='none'" title="બંધ કરો">✕</span>
+    </div>
+    <div id="flash-msg">લોડ થઈ રહ્યું છે...</div>
+    <div id="flash-footer">
+      <div id="flash-dots"></div>
+      <span id="flash-counter"></span>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const FLASH_API = "https://script.google.com/macros/s/AKfycbyayDnnalG7p1jaZh8UVPcQ00DqroxU1eqpKCG1T0DyMw8EVE2tY7ZULw5Cfv2Fv3Ci/exec";
+  let messages = [], idx = 0;
+
+  function renderDots() {
+    const dotsEl = document.getElementById("flash-dots");
+    const ctrEl  = document.getElementById("flash-counter");
+    dotsEl.innerHTML = messages.map((_, i) =>
+      `<div class="fdot ${i === idx ? 'active' : ''}" onclick="flashJump(${i})"></div>`
+    ).join("");
+    ctrEl.textContent = messages.length ? `${idx + 1} / ${messages.length}` : "";
+  }
+
+  window.flashJump = function(i) {
+    if (i === idx) return;
+    const el = document.getElementById("flash-msg");
+    el.style.opacity = 0;
+    setTimeout(() => { idx = i; el.textContent = messages[idx]; el.scrollTop = 0; el.style.opacity = 1; renderDots(); }, 250);
+  };
+
+  function rotate() {
+    if (!messages.length) return;
+    const el = document.getElementById("flash-msg");
+    el.style.opacity = 0;
+    setTimeout(() => { idx = (idx + 1) % messages.length; el.textContent = messages[idx]; el.scrollTop = 0; el.style.opacity = 1; renderDots(); }, 250);
+  }
+
+  function loadFlash() {
+    const cbName = "flashCb_" + Date.now();
+    const script = document.createElement("script");
+    let done = false;
+
+    const timer = setTimeout(() => {
+      if (done) return;
+      done = true;
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      document.getElementById("flash-wrap").style.display = "none";
+    }, 8000);
+
+    window[cbName] = function(data) {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      if (Array.isArray(data) && data.length) {
+        messages = data.map(d => d.message).filter(Boolean);
+        idx = 0;
+        const el = document.getElementById("flash-msg");
+        el.textContent = messages[0];
+        el.style.opacity = 1;
+        renderDots();
+        document.getElementById("flash-wrap").style.display = "";
+      } else {
+        document.getElementById("flash-wrap").style.display = "none";
+      }
+    };
+
+    script.src = FLASH_API + "?callback=" + cbName + "&t=" + Date.now();
+    script.onerror = function() {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      delete window[cbName];
+      document.getElementById("flash-wrap").style.display = "none";
+    };
+    document.head.appendChild(script);
+  }
+
+  setInterval(rotate, 10000);
+  setInterval(loadFlash, 30000);
+  loadFlash();
+})();
+
+function openImage(src) {
+  document.getElementById("viewer").classList.add("active");
+  document.getElementById("fullImage").src = src;
+}
+function closeImage() {
+  document.getElementById("viewer").classList.remove("active");
+}
+</script>
+
+<div class="page">
+
+  <!-- ══ SECTION: NIDAAN ══ -->
+  <div class="sec-wrap" id="nidaan">
+    <div class="sec-label">નિદાન</div>
+    <h2 class="sec-head">શું તમારા વાહન એન્જિન માં આ તકલીફ છે?</h2>
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="pcard-img"><img src="Engine_low_power.png" alt="ઓછી તાકાત" onclick="openImage(this.src)"></div>
+        <div class="pcard-lbl">ઓછી તાકાત / એન્જિન દબાય છે</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"><img src="Vehicle_smoke.png" alt="ધુમાડો" onclick="openImage(this.src)"></div>
+        <div class="pcard-lbl">ધુમાડો કાઢે છે</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"><img src="less_average.png" alt="ઓછી એવરેજ" onclick="openImage(this.src)"></div>
+        <div class="pcard-lbl">એવરેજ ઓછી / વધુ ડીઝલ ખપત</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"><img src="Engine_Overheating.png" alt="ગરમ" onclick="openImage(this.src)"></div>
+        <div class="pcard-lbl">એન્જિન ગરમ થાય છે</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"><img src="knocking_Image.png" alt="નોકિંગ" onclick="openImage(this.src)"></div>
+        <div class="pcard-lbl">એન્જિન નોકિંગ / અવાજ</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img"><img src="fuel_injection_issue.png" alt="ઈન્જેક્શન" onclick="openImage(this.src)"></div>
+        <div class="pcard-lbl">ફ્યુઈલ ઈન્જેક્શન સમસ્યા</div>
+      </div>
+    </div>
+    <div class="info-strip">
+      આ બધી તકલીફો <strong>એન્જિન સિવાય ફ્યુઈલ ઈન્જેક્શન સિસ્ટમ</strong> અથવા <strong>ફ્યુઈલ પંપ</strong> માં પણ હોઈ શકે.<br>
+      <strong>બોશ કંપનીના સર્ટિફાઇડ મશીનથી</strong> ઇન્જેક્શન ટેસ્ટિંગ અને રિપેરિંગ.<br>
+      ઇન્જેક્શન પંપ / ડીઝલ પંપ અને ઇન્જેક્ટર (એટોમાઇઝર) — <strong>સંતોષકારક અને વ્યાજબી ભાવે</strong> રીપેર.<br>
+      પંપ સેટ રીપેરિંગ માટે રૂબરૂ ન આવી શકાય તો ગાડી માંથી ઉતારી, રીપેર કરી <strong>તમને મોકલી આપીશું.</strong> વધુ માહિતી માટે <a href="Diesel_Fuel_Injection_System_Issues.html" target="_blank"><strong><p class="blink-smooth">અહીં ક્લિક કરો</p></strong></a></strong>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:36px;"></div>
+
+  <!-- ══ SECTION: PRODUCTS ══ -->
+  <div class="sec-wrap" id="products">
+    <div class="sec-label">પ્રોડક્ટ્સ અને સેવાઓ</div>
+    <h2 class="sec-head">ઓરિજિનલ બોશ પાર્ટ્સ અને ઉત્પાદનો</h2>
+    <div class="sgrid">
+      <div class="scard">
+        <div class="scard-img"><img src="fuelinjectionparts.png" alt="ઈન્જેક્શન પાર્ટ્સ" loading="lazy"></div>
+        <div class="scard-lbl">ઓરિજિનલ ઈન્જેક્શન પાર્ટ્સ</div>
+      </div>
+      <div class="scard">
+        <div class="scard-img"><img src="filters.png" alt="ફિલ્ટર" loading="lazy"></div>
+        <div class="scard-lbl">ડીઝલ ફિલ્ટર, ઓઈલ ફિલ્ટર. એર ફિલ્ટર</div>
+      </div>
+      <div class="scard">
+        <div class="scard-img"><img src="batteries.png" alt="બેટરી" loading="lazy"></div>
+        <div class="scard-lbl">બેટરી</div>
+      </div>
+      <div class="scard">
+        <div class="scard-img"><img src="oils.png" alt="ઓઈલ" loading="lazy"></div>
+        <div class="scard-lbl">એન્જિન ઓઈલ, ગિયર ઓઈલ, એ.ટી.એફ.</div>
+      </div>
+      <div class="scard">
+        <div class="scard-img"><img src="sparkplug.jpg" alt="સ્પાર્ક પ્લગ" loading="lazy"></div>
+        <div class="scard-lbl">સ્પાર્ક પ્લગ</div>
+      </div>
+      <div class="scard">
+        <div class="scard-img"><img src="bosch_Injection_testing.jpg" alt="ટેસ્ટિંગ" loading="lazy"></div>
+        <div class="scard-lbl">બોશ મશીન ટેસ્ટિંગ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:36px;"></div>
+
+  <!-- ══ SECTION: CERTIFICATES ══ -->
+  <div class="sec-wrap" id="certificates">
+    <div class="sec-label">પ્રમાણપત્રો અને દસ્તાવેજો</div>
+    <h2 class="sec-head">સત્તાવાર નોંધણી અને પ્રમાણપત્રો</h2>
+    <div class="cert-grid">
+
+      <!-- GST Certificate -->
+      <div class="cert-card" onclick="window.open('GST_CERT.pdf','_blank')">
+        <div class="cert-icon-wrap">
+          <svg class="cert-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="4" width="28" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M14 14h20M14 20h20M14 26h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="36" cy="36" r="8" fill="white" stroke="currentColor" stroke-width="2"/>
+            <path d="M32.5 36l2.5 2.5 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">જીએસટી પ્રમાણપત્ર</div>
+          <div class="cert-type">PDF દસ્તાવેજ</div>
+          <button class="cert-open-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            જુઓ
+          </button>
+        </div>
+      </div>
+
+      <!-- Udyog Aadhar -->
+      <div class="cert-card" onclick="window.open('BPSC udhyog aadhar.pdf','_blank')">
+        <div class="cert-icon-wrap">
+          <svg class="cert-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="8" width="36" height="28" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <circle cx="18" cy="20" r="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 36c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M30 18h6M30 24h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">ઉદ્યોગ આધાર પ્રમાણપત્ર</div>
+          <div class="cert-type">PDF દસ્તાવેજ</div>
+          <button class="cert-open-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            જુઓ
+          </button>
+        </div>
+      </div>
+
+      <!-- List of Industrial Customers -->
+      <div class="cert-card" onclick="window.open('List of Industrial customers.pdf','_blank')">
+        <div class="cert-icon-wrap">
+          <svg class="cert-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="4" width="28" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M14 13h6M14 19h6M14 25h6M14 31h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M24 13h8M24 19h8M24 25h8M24 31h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">ઔદ્યોગિક ગ્રાહકોની યાદી</div>
+          <div class="cert-type">PDF દસ્તાવેજ</div>
+          <button class="cert-open-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            જુઓ
+          </button>
+        </div>
+      </div>
+
+      <!-- Bank Details -->
+      <div class="cert-card" onclick="window.open('JDH_BANK.txt','_blank')">
+        <div class="cert-icon-wrap">
+          <svg class="cert-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 18l18-12 18 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="10" y="18" width="6" height="14" stroke="currentColor" stroke-width="2"/>
+            <rect x="21" y="18" width="6" height="14" stroke="currentColor" stroke-width="2"/>
+            <rect x="32" y="18" width="6" height="14" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 32h36v4H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">JDH બેંક ખાતા વિગતો</div>
+          <div class="cert-type">ટેક્સ્ટ ફાઇલ</div>
+          <button class="cert-open-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            જુઓ
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:36px;"></div>
+
+  <!-- ══ SECTION: PAYMENT ══ -->
+  <div class="sec-wrap" id="payment">
+    <div class="sec-label">ચુકવણી</div>
+    <h2 class="sec-head">ઓનલાઇન ચુકવણી અને બેંક વિગતો</h2>
+    <div class="gpay-wrap">
+      <div class="gpay-qr">
+        <img src="Barcode.png" alt="જીપે બારકોડ" loading="lazy">
+        <div class="gpay-qr-label">📱 જીપે </div>
+      </div>
+      <div class="bank-details">
+        <p style="font-size:13px; color:var(--gray-500); margin-bottom:14px; line-height:1.7;">
+         ક્યુઆર કોડ સ્કેન કરી સીધી ઓનલાઇન ચુકવણી કરી શકાય છે.<br>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:36px;"></div>
+
+  <!-- ══ SECTION: INDUSTRIAL CUSTOMERS ══ -->
+  <div class="sec-wrap" id="customers">
+    <div class="sec-label">ઔદ્યોગિક ગ્રાહકો</div>
+    <h2 class="sec-head">અમારા ભરોસાપાત્ર ઔદ્યોગિક ગ્રાહકો</h2>
+    <div class="cust-strip">
+      <div class="cust-info">
+        <div class="cust-title">ઔદ્યોગિક ગ્રાહકોની સૂચિ</div>
+        <div class="cust-sub">
+          ૫૦+ વર્ષ ના અનુભવ સાથે, અમે રાજકોટ અને આસપાસના<br>
+          અનેક ઔદ્યોગિક એકમો, ટ્રાન્સપોર્ટ કંપનીઓ અને<br>
+          ખેડૂતોને સેવા આપી છે.
+        </div>
+      </div>
+      <button class="cust-btn" onclick="window.open('List of Industrial customers.pdf','_blank')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        ગ્રાહકોની સૂચિ જુઓ
+      </button>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:36px;"></div>
+
+  <!-- ══ SECTION: CONTACT ══ -->
+  <div class="sec-wrap" id="contact">
+    <div class="sec-label">સંપર્ક</div>
+    <h2 class="sec-head">અમારો સંપર્ક કરો</h2>
+    <div class="contact-block">
+      <div class="contact-hd">
+        <h3>ભારત પેટ્રોલિયમ સર્વિસ સેન્ટર (બોશ ઓથોરાઇઝ્ડ વર્કશોપ)</h3>
+        <span class="est">સ્થાપના : ૫૦+ વર્ષ</span>
+      </div>
+      <div class="contact-bd">
+        <div>
+          <div class="grp-lbl">સરનામું</div>
+          <div class="addr">
+            માલવિયા પેટ્રોલ પમ્પ સામે,<br>
+            મહાકાલેશ્વર મંદિરની બાજુ,<br>
+            હોટલ સિલ્વર પેલેસ પાસે,<br>
+            ગોંડલ રોડ,<br>
+            <strong>રાજકોટ – ૩૬૦૦૦૨</strong>
+          </div>
+          <a class="map-link" href="https://maps.app.goo.gl/6R6oPPz9Wx8yW6NC6" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ગૂગલ મેપ પર જુઓ
+          </a>
+        </div>
+        <div>
+          <div class="grp-lbl">ફોન નંબર</div>
+          <div class="phones">
+            <div class="phone-row">
+              <div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+              <div>
+                <div class="ph-num">૯૮૯૮૫ ૦૦૬૪૩</div>
+                <div class="ph-name">હન્સભાઈ</div>
+              </div>
+            </div>
+            <div class="phone-row">
+              <div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+              <div>
+                <div class="ph-num">૯૨૨૮૨ ૧૯૯૮૭</div>
+                <div class="ph-name">નરેન્દ્રભાઈ</div>
+              </div>
+            </div>
+            <div class="phone-row">
+              <div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+              <div>
+                <div class="ph-num">૯૪૨૬૭ ૮૫૨૫૪</div>
+                <div class="ph-name">સૌરભભાઈ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-ft">
+        🙏 ૫૦ વર્ષથી આપનો વિશ્વાસ અને સહકાર મળ્યો છે — ડીઝલ પંપ, ઇન્જેક્ટર (એટોમાઇઝર) — બોશ મશીન પર, <strong>સંતોષકારક અને વ્યાજબી ભાવે. આજે જ સંપર્ક કરો.</strong>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span class="f-brand">ભારત પેટ્રોલિયમ્સ સર્વિસ સેન્ટર</span>
+  <span class="f-meta">
+    બોશ ઓથોરાઇઝ્ડ વર્કશોપ
+    <span class="dot"></span>
+    ગોંડલ રોડ, રાજકોટ
+    <span class="dot"></span>
+    ૯૮૯૮૫ ૦૦૬૪૩
+  </span>
+</footer>
+<div id="viewer" class="viewer" onclick="closeImage()">
+  <img id="fullImage">
+</div>
+</body>
+</html>

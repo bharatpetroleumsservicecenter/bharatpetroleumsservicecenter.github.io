@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ભારત પેટ્રોલિયમ્સ સર્વિસ સેન્ટર</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:     #c8102e;
+      --dark:    #111111;
+      --mid:     #1e1e1e;
+      --card-bg: #181818;
+      --border:  #2e2e2e;
+      --gold:    #e8a020;
+      --text:    #e8e8e8;
+      --muted:   #888;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Tiro Devanagari Hindi', serif;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .bp-section {
+      padding: 80px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADING ── */
+    .bp-heading {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .bp-heading .label {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .bp-heading h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+    }
+
+    .bp-heading h2 span {
+      color: var(--red);
+    }
+
+    .bp-heading .rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .bp-heading .rule::before,
+    .bp-heading .rule::after {
+      content: '';
+      width: 80px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .bp-heading .rule-dot {
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    /* ── GRID ── */
+    .bp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── CARD ── */
+    .bp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      animation: fadeUp 0.6s ease backwards;
+    }
+
+    .bp-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(200, 16, 46, 0.18);
+      border-color: var(--red);
+    }
+
+    /* staggered entrance */
+    .bp-card:nth-child(1) { animation-delay: 0.05s; }
+    .bp-card:nth-child(2) { animation-delay: 0.10s; }
+    .bp-card:nth-child(3) { animation-delay: 0.15s; }
+    .bp-card:nth-child(4) { animation-delay: 0.20s; }
+    .bp-card:nth-child(5) { animation-delay: 0.25s; }
+    .bp-card:nth-child(6) { animation-delay: 0.30s; }
+    .bp-card:nth-child(7) { animation-delay: 0.35s; }
+    .bp-card:nth-child(8) { animation-delay: 0.40s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* image wrapper */
+    .bp-card-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #222;
+      position: relative;
+    }
+
+    .bp-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .bp-card:hover .bp-card-img img {
+      transform: scale(1.07);
+    }
+
+    /* red accent bar on hover */
+    .bp-card-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .bp-card:hover .bp-card-img::after {
+      transform: scaleX(1);
+    }
+
+    /* body */
+    .bp-card-body {
+      padding: 22px 20px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bp-card-body h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .bp-card-body p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* CTA button */
+    .bp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 10px 20px;
+      background: transparent;
+      border: 1.5px solid var(--red);
+      color: var(--red);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s;
+      align-self: flex-start;
+    }
+
+    .bp-btn:hover {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .bp-btn svg {
+      transition: transform 0.25s;
+    }
+
+    .bp-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ── ALL PRODUCTS BANNER ── */
+    .bp-all-banner {
+      margin-top: 50px;
+      padding: 36px 40px;
+      background: linear-gradient(110deg, #1a0306 0%, #2a0008 50%, #1a0306 100%);
+      border: 1px solid var(--red);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .bp-all-banner h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+
+    .bp-all-banner p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    .bp-btn-filled {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .bp-btn-filled:hover {
+      background: #a50d25;
+      transform: translateY(-2px);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .bp-all-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 20px;
+      }
+      .bp-btn-filled { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="bp-section">
+
+  <!-- Heading -->
+  <div class="bp-heading">
+        <h2>ભારત પેટ્રોલિયમ્સ સર્વિસ સેન્ટર<br><span>અમારા પ્રોડક્ટ્સ</span></h2>
+    <div class="rule"><div class="rule-dot"></div></div>
+  </div>
+
+  <!-- Product Cards -->
+  <div class="bp-grid">
+
+    <!-- 1. Spark Plugs -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="Sparkplugs.png" alt="સ્પાર્ક પ્લગ" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>સ્પાર્ક પ્લગ</h3>
+        <p>પેટ્રોલ ઇંજીન માટે ઉચ્ચ ગુણવત્તાના બોશ્ સ્પાર્ક પ્લગ — વધુ ઇંધન બચત અને ઓછું ઉત્સર્જન.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. Batteries -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="Bosch_Batteries.png" alt="બ્લેટરી" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>બોશ્ બ્લેટરી</h3>
+        <p>લાંબા જીવન અને ઉચ્ચ પ્રવાહ ધરાવતી બ્લેટરી — કાર, ટ્રક અને SUV માટે.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. Car Filters -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="Bosch_Car_FIlters.png" alt="કાર ફિલ્ટર" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>કાર ફિલ્ટર્સ</h3>
+        <p>એર, ઓઇલ, ઇંધન અને કેબિન ફિલ્ટર — ઇંજીનને સ્વચ્છ અને ઠંડું રાખે.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 4. Commercial Vehicle Filters -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="Bosch_filters.jpeg" alt="વ્યાપારી વાહન ફિલ્ટર" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>વ્યાપારી વાહન ફિલ્ટર્સ</h3>
+        <p>ટ્રક, બસ અને ભારે વાહનો માટે ખાસ ડિઝાઇન કરેલ ફિલ્ટર્સ.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. Wiper Blades -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="VIper_Blades.png" alt="વાઇપર બ્લેડ" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>વાઇપર બ્લેડ્સ</h3>
+        <p>ચોખ્ખી દ્રષ્ટિ અને ઝડપી સ્વચ્છતા — ચોમાસા અને ધૂળ બંનેમાં કાર્યક્ષમ.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. Starters & Alternators -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="Starters_and_Alternators.png" alt="સ્ટાર્ટર અને ઓલ્ટરનેટર" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>સ્ટાર્ટર્સ અને ઓલ્ટરનેટર્સ</h3>
+        <p>વાહનના ઇલેક્ટ્રિક સિસ્ટમ માટે ભરોસાપાત્ર સ્ટાર્ટર અને ઓલ્ટરનેટર.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 7. Diesel Fuel Injection -->
+    <div class="bp-card">
+      <div class="bp-card-img">
+        <img src="fuel_injector_assembly.jpeg" alt="ડીઝલ ઇંધન ઇજેક્શન" loading="lazy"/>
+      </div>
+      <div class="bp-card-body">
+        <h3>ડીઝલ ઇંધન ઇજેક્શન સિસ્ટમ</h3>
+        <p>કોમ્મ્યુલ-રેલ ઇજેક્ટર અને ડીઝલ પંપ — ઓછું ઇંધન, વધુ શક્તિ.</p>
+        <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn" target="_blank">
+          કેટેલોગ જુઓ
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /.bp-grid -->
+
+  <!-- All Products Banner -->
+  <div class="bp-all-banner">
+    <div>
+      <h3>બોશ્ ઈન્ડિયા — સંપૂર્ણ પ્રોડક્ટ કેટેલોગ</h3>
+      <p>તમામ બોશ્ ઓટોમોટિવ પ્રોડક્ટ્સ એક જ જગ્યાએ — PDF સ્વરૂપે જુઓ.</p>
+    </div>
+    <a href="https://ap.boschaftermarket.com/in/en/news/download-centre/browse-all-downloads/" class="bp-btn-filled" target="_blank">
+      સંપૂર્ણ કેટેલોગ જુઓ
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+</section>
+
+</body>
+</html>

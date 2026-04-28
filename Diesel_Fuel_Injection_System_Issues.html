@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>બૉશ ડીઝલ ઇન્જેક્શન — ટેકનિકલ માર્ગદર્શન</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@300;400;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red:       #c62828;
+      --red-dark:  #8b0000;
+      --red-light: #ef5350;
+      --black:     #0d0d0d;
+      --gray-900:  #1a1a1a;
+      --gray-800:  #2a2a2a;
+      --gray-700:  #3a3a3a;
+      --gray-400:  #888;
+      --gray-200:  #ccc;
+      --gray-100:  #efefef;
+      --white:     #f8f6f2;
+      --accent:    #ff6b35;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Noto Sans Gujarati', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--gray-900);
+      border-bottom: 3px solid var(--red);
+      padding: 0 40px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      background: var(--red);
+      color: white;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 4px;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      margin-right: 24px;
+    }
+
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 12px 0;
+    }
+
+    .header-title h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .header-title span {
+      font-size: 12px;
+      color: var(--gray-400);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── NAV TABS ── */
+    nav {
+      display: flex;
+      gap: 0;
+      padding: 0 40px;
+      background: var(--gray-800);
+      border-bottom: 1px solid var(--gray-700);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    nav::-webkit-scrollbar { display: none; }
+
+    .tab {
+      padding: 14px 22px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-400);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab:hover { color: var(--white); background: var(--gray-700); }
+
+    .tab.active {
+      color: var(--white);
+      border-bottom-color: var(--red-light);
+      background: var(--gray-900);
+    }
+
+    .tab .tab-num {
+      background: var(--gray-700);
+      color: var(--gray-400);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .tab.active .tab-num {
+      background: var(--red);
+      color: white;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    .panel { display: none; animation: fadeUp 0.35s ease; }
+    .panel.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PANEL HEADER ── */
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--gray-700);
+    }
+
+    .panel-icon {
+      font-size: 48px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .panel-header h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .panel-header p {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+
+    /* ── SECTION CARDS ── */
+    .section {
+      margin-bottom: 28px;
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      background: var(--gray-800);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--gray-700);
+    }
+
+    .section-header .badge {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-cause   { background: #4a1a00; color: #ff8a50; border: 1px solid #7a3000; }
+    .badge-test    { background: #0a2a1a; color: #4caf7d; border: 1px solid #1a5a30; }
+    .badge-result  { background: #1a1a40; color: #82b1ff; border: 1px solid #2a2a70; }
+
+    .section-header h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    /* ── CAUSE ITEMS ── */
+    .cause-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .cause-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      background: var(--gray-800);
+      border-radius: 6px;
+      border-left: 3px solid var(--red);
+    }
+
+    .cause-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .cause-text { color: var(--gray-100); font-size: 14px; line-height: 1.7; }
+    .cause-text strong { color: var(--accent); font-weight: 600; }
+
+    /* ── TEST ITEMS ── */
+    .test-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .test-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border: 1px solid var(--gray-700);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .test-name {
+      background: var(--gray-800);
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4caf7d;
+      font-family: 'JetBrains Mono', monospace;
+      border-right: 1px solid var(--gray-700);
+      display: flex;
+      align-items: center;
+    }
+
+    .test-desc {
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--gray-100);
+      line-height: 1.6;
+    }
+
+    /* ── RESULT BOX ── */
+    .result-box {
+      background: linear-gradient(135deg, #0d1a2a, #1a2a0d);
+      border: 1px solid #2a4a2a;
+      border-left: 4px solid #4caf7d;
+      border-radius: 6px;
+      padding: 18px 20px;
+      font-size: 14px;
+      color: #c8e6c9;
+      line-height: 1.8;
+    }
+
+    .result-box .highlight {
+      color: #69f0ae;
+      font-weight: 600;
+    }
+
+    /* ── SMOKE SPLIT ── */
+    .smoke-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .smoke-card {
+      border-radius: 6px;
+      padding: 16px;
+      border: 1px solid;
+    }
+
+    .smoke-card.black {
+      background: #1a1000;
+      border-color: #5a3a00;
+    }
+
+    .smoke-card.white {
+      background: #1a1a2a;
+      border-color: #3a3a6a;
+    }
+
+    .smoke-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .smoke-card.black h4 { color: #ffb74d; }
+    .smoke-card.white h4 { color: #90caf9; }
+
+    .smoke-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .smoke-card ul li {
+      font-size: 13px;
+      color: var(--gray-200);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .smoke-card.black ul li::before { content: "▸"; position: absolute; left: 0; color: #ffb74d; }
+    .smoke-card.white ul li::before { content: "▸"; position: absolute; left: 0; color: #90caf9; }
+
+    /* ── MODELS BAR ── */
+    .models-bar {
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 6px;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .models-bar span {
+      font-size: 12px;
+      color: var(--gray-400);
+      font-family: 'JetBrains Mono', monospace;
+      margin-right: 6px;
+    }
+
+    .model-tag {
+      background: var(--gray-700);
+      color: var(--gray-100);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--gray-600);
+      font-weight: 600;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      header { padding: 0 16px; }
+      nav { padding: 0 8px; }
+      main { padding: 24px 16px 60px; }
+      .test-item { grid-template-columns: 1fr; }
+      .test-name { border-right: none; border-bottom: 1px solid var(--gray-700); }
+      .smoke-grid { grid-template-columns: 1fr; }
+      .panel-header { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-logo">BOSCH</div>
+  <div class="header-title">
+    <h1>ડીઝલ ઇન્જેક્શન ટેકનિકલ માર્ગદર્શન</h1>
+    <span>કેલિબ્રેશન · ટેસ્ટ બેન્ચ · નિદાન</span>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav>
+  <div class="tab active" onclick="showTab(0)"><span class="tab-num">૧</span>ગરમ થવું</div>
+  <div class="tab" onclick="showTab(1)"><span class="tab-num">૨</span>ઓછી શક્તિ</div>
+  <div class="tab" onclick="showTab(2)"><span class="tab-num">૩</span>ચાલુ ન થવું</div>
+  <div class="tab" onclick="showTab(3)"><span class="tab-num">૪</span>ધુમાડો</div>
+  <div class="tab" onclick="showTab(4)"><span class="tab-num">૫</span>વધારે ડીઝલ</div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- ① ઓવરહીટિંગ -->
+  <div class="panel active" id="panel-0">
+    <div class="panel-header">
+      <div class="panel-icon">🌡️</div>
+      <div>
+        <h2>એન્જિન વધુ ગરમ થવું</h2>
+        <p>ઇન્જેક્શન સિસ્ટમ સાથે સીધી રીતે સંકળાયેલ ગંભીર સમસ્યા — ૮૦% કેસ ટાઇમિંગ અથવા ઓવર-ફ્યૂઅલ સ્પ્રેથી થાય</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="badge badge-cause">📌 કારણો</span>
+        <h3>ગરમ થવાના મુખ્ય કારણો</h3>
+      </div>
+      <div class="section-body">
+        <div class="cause-list">
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>વધારે ઇંધણ:</strong> ઇન્જેક્ટર ઘણું ઇંધણ છોડે — અધૂરું દહન, ધુમાડાની નળી ખૂબ ગરમ.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્શન મોડું:</strong> ઓછા દબાણ વખતે ઇન્જેક્ટ, દહન અધૂરું — ગરમી વધે.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>નોઝલ છંટકાવ ખરાબ:</strong> ઝીણી ઝાકળ ન બને — ઇંધણ ધારામાં, ગરમ ભાગો સ્પર્શ કરે.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>પાછું ઇંધણ ગળવું:</strong> ઇન્જેક્ટર અંદરથી ઇંધણ પાછું ટાંકીમાં — ઇન્જેક્ટર ગરમ રહે.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="badge badge-test">🔧 ટેસ્ટ</span>
+        <h3>બૉશ ટેસ્ટ બેન્ચ ચકાસણી</h3>
+      </div>
+      <div class="section-body">
+        <div class="test-list">
+          <div class="test-item"><div class="test-name">સંપૂર્ણ ભાર ફ્લો</div><div class="test-desc">૧૦૦૦ અને ૧૬૦૦ બાર દબાણ પર ઇંધણ ડિલિવરી — બધા ઇન્જેક્ટર ૨–૩% ની અંદર.</div></div>
+          <div class="test-item"><div class="test-name">છંટકાવ પેટર્ન</div><div class="test-desc">ઝીણી ઝાકળ ન હોય — ઓપ્ટિકલ ટેસ્ટ — ન હોય તો નોઝલ બદલો.</div></div>
+          <div class="test-item"><div class="test-name">પાછું ઇંધણ</div><div class="test-desc">પાછા ઇંધણ માપો — બૉશ ૧૦૦ ચળ./cc ધોરણ — વધારે = ઇન્જેક્ટર ગળે.</div></div>
+          <div class="test-item"><div class="test-name">ઇન્જેક્શન સમય</div><div class="test-desc">ટોચ બિંદુ (TDC)ની ગણતરી — ±૦.૫ ડિગ્રી ચોકસાઈ — બૉશ ડેટા શીટ.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="badge badge-result">✅ પ્રમાણ</span>
+        <h3>અપેક્ષિત પરિણામ</h3>
+      </div>
+      <div class="section-body">
+        <div class="result-box">
+          ગરમ એન્જિનમાં <span class="highlight">૮૦% કેસ</span> ટાઇમિંગ ખોટું અથવા ઓવર-ફ્યૂઅલ છંટકાવ ખરાબ હોવાથી થાય. ફ્લો ટેસ્ટ અને ટાઇમિંગ ચેક — <span class="highlight">બંને ભેગા</span> — ચોક્કસ કારણ શોધો.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② ઓછી શક્તિ -->
+  <div class="panel" id="panel-1">
+    <div class="panel-header">
+      <div class="panel-icon">⚡</div>
+      <div>
+        <h2>ઓછી શક્તિ</h2>
+        <p>એન્જિન ઝડપ ઉઠાવ ન કરે, ભાર ઉઠાવવામાં તકલીફ, ઝડપ વધારવામાં આળસ</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="badge badge-cause">📌 કારણો</span>
+        <h3>ઓછી શક્તિના મુખ્ય કારણો</h3>
+      </div>
+      <div class="section-body">
+        <div class="cause-list">
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્ટર ઓછું ઇંધણ:</strong> નોઝલ બંધ, ઘસારો, વાઇન્ડિંગ નબળી — ઇંધણ ઓછું.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>પંપ ઓછું દબાણ:</strong> સામાન્ય રૂ-રેલ — ૩૦૦–૧૬૦૦ બારની મર્યાદા ન જળવાય.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્ટર ચળવળ ઓછી:</strong> ભૂંસ ઘસાઈ ગઈ — સ્ટ્રૉક ઓછો.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>પ્રારંભ ઇન્જેક્શન નથી:</strong> મુખ્ય દહન ઠૂંસાઈ — સરળ શક્તિ ન મળે, ઠક-ઠ.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇંધણ ગાળણ ભરેલ:</strong> દબાણ ઘટે — ઇન્જેક્ટર સુધી ઇંધણ ઓછું.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="badge badge-test">🔧 ટેસ્ટ</span>
+        <h3>બૉશ ટેસ્ટ બેન્ચ ચકાસણી</h3>
+      </div>
+      <div class="section-body">
+        <div class="test-list">
+          <div class="test-item"><div class="test-name">સંપૂર્ણ ભાર માત્રા</div><div class="test-desc">ઝડપ-પ્રમાણ ઇંધણ cc/ચળ — બૉશ ડેટા શીટ સામે — ±૨% ભેગ.</div></div>
+          <div class="test-item"><div class="test-name">ઓછી ઝડપ માત્રા</div><div class="test-desc">ઓછી ઝડપ RPM અનુકરણ — ઇન્જેક્ટ થતી ઇંધણ માત્રા — ઓછી = ઠક-ઠ.</div></div>
+          <div class="test-item"><div class="test-name">પ્રારંભ ઇન્જેક્શન</div><div class="test-desc">સામાન્ય રૂ-રેલ ઇન્જેક્ટર — ૧–૨ mg પ્રારંભ ઇન્જેક્શન — ઓછી = ઓછી શક્તિ.</div></div>
+          <div class="test-item"><div class="test-name">રૂ-રેલ દબાણ</div><div class="test-desc">૩૦૦, ૮૦૦, ૧૨૦૦, ૧૬૦૦ બાર — પંપ ડિલિવરી ચકાસો.</div></div>
+          <div class="test-item"><div class="test-name">નોઝલ ગળવું</div><div class="test-desc">૧૦૦ બાર — ૧૦ સેકન્ડ — ટીપું ન આવે = સારું, ટીપું = નોઝલ ખરાબ.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-result">✅ પ્રમાણ</span><h3>અપેક્ષિત પરિણામ</h3></div>
+      <div class="section-body">
+        <div class="result-box">
+          બધા ઇન્જેક્ટર <span class="highlight">±૨% ઇંધણ ભેગ</span> — નહિ તો નબળો ઇન્જેક્ટર શક્તિ સંતુલન ખોટો કરે. ફ્લો ઇમ્બૅલૅન્સ <span class="highlight">૫% કે વધારે</span> = ઇન્જેક્ટર બદલો.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ ચાલુ ન થવું -->
+  <div class="panel" id="panel-2">
+    <div class="panel-header">
+      <div class="panel-icon">🚀</div>
+      <div>
+        <h2>એન્જિન ચાલુ ન થવું</h2>
+        <p>ઠંડા કે ગરમ — બંને પરિસ્થિતિ — ઇંધણ દબાણ ઓછું = ચાલુ ન થાય</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-cause">📌 કારણો</span><h3>ચાલુ ન થવાના મુખ્ય કારણો</h3></div>
+      <div class="section-body">
+        <div class="cause-list">
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>નોઝલ બેઠક ગળવું:</strong> ટોચ પર ઇંધણ ટપકે — રૂ-રેલ દબાણ ઓછો રહે.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>નિયંત્રણ વાલ્વ ગળવું:</strong> ઇન્જેક્ટર અંદર ઘસારો — ઇંધણ ઘણું પાછું.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્ટર બંધ ન થાય:</strong> બાકી ઇંધણ સિલિન્ડરમાં — સંકોચ ઘટે.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇંધણ વિતરણ વાલ્વ ખરાબ:</strong> નળીમાં દબાણ ટકે નહિ — ઇન્જેક્ટ ઓછું.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ખૂલવાનું દબાણ ઓછું:</strong> ૨૦૦–૨૫૦ બારની જગ્યાએ ૧૨૦–૧૪૦ — છંટકાવ વહેલો.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-test">🔧 ટેસ્ટ</span><h3>બૉશ ટેસ્ટ બેન્ચ ચકાસણી</h3></div>
+      <div class="section-body">
+        <div class="test-list">
+          <div class="test-item"><div class="test-name">ખૂલવા દબાણ</div><div class="test-desc">ઇન્જેક્ટર હાથથી દબાણ — ચોક્કસ બાર — બૉશ ડેટા શીટ સામે (૨૦૦–૨૫૦ bar).</div></div>
+          <div class="test-item"><div class="test-name">નોઝલ ગળવું</div><div class="test-desc">૧૫૦ બાર — ૩૦ સેકન્ડ — સૂકી ટોચ = સારી, ભીની = નામંજૂર.</div></div>
+          <div class="test-item"><div class="test-name">પાછું ઇંધણ</div><div class="test-desc">૧૦૦ ચળ. પછી cc — ધોરણ કરતા વધારે = નિયંત્રણ વાલ્વ ગળે.</div></div>
+          <div class="test-item"><div class="test-name">વાઇન્ડિંગ પ્રતિકાર</div><div class="test-desc">સોલેનોઇડ: ૦.૩–૦.૭ ઓહ્મ — ક્રિસ્ટલ: ખાસ કોરોના ટેસ્ટ કિટ.</div></div>
+          <div class="test-item"><div class="test-name">વિતરણ વાલ્વ</div><div class="test-desc">ઊંધા દબાણ ચકાસો — વાલ્વ બેઠક સારી — મૅકૅનિકલ પંપ.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-result">✅ પ્રમાણ</span><h3>અપેક્ષિત પરિણામ</h3></div>
+      <div class="section-body">
+        <div class="result-box">
+          ઠંડો ચાલુ ચકાસો: <span class="highlight">-૧૦°C અનુકરણ</span> — ૨૦૦ બારથી ઓછા ખૂલવા દબાણ = ચાલુ ન થાય ચોક્કસ. <span class="highlight">નોઝલ ટીપું + ઓછું દબાણ = ૯૦%</span> હાર્ડ સ્ટાર્ટ.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ ધુમાડો -->
+  <div class="panel" id="panel-3">
+    <div class="panel-header">
+      <div class="panel-icon">💨</div>
+      <div>
+        <h2>કાળો અને સફેદ ધુમાડો</h2>
+        <p>ધુમાડાનો રંગ જ નિદાનની ચાવી — કાળો ≠ સફેદ, બંનેના અલગ કારણ</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-cause">📌 કારણો</span><h3>ધુમાડાના કારણો — રંગ પ્રમાણ</h3></div>
+      <div class="section-body">
+        <div class="smoke-grid">
+          <div class="smoke-card black">
+            <h4>🔴 કાળો ધુમાડો</h4>
+            <ul>
+              <li>ઇન્જેક્ટર વધારે ઇંધણ — નોઝલ ઘસાઈ, મોટા ટીપા, અધૂરું દહન</li>
+              <li>ઇન્જેક્શન ઝડપ આગળ — ઘણું વહેલું — સિલિન્ડર દબાણ ખોટું</li>
+              <li>ઓછી હવા — ઓછો ઑક્સિજન — ઇંધણ બળ્યા વગર</li>
+              <li>છંટકાવ ટૂટ્યો — ઇંધણ દીવાલ પર ચોંટે</li>
+            </ul>
+          </div>
+          <div class="smoke-card white">
+            <h4>⚪ સફેદ ધુમાડો</h4>
+            <ul>
+              <li>ઇન્જેક્ટર ટપકવું — ઠંડો સિલિન્ડર — ઇંધણ વરાળ ન થાય</li>
+              <li>ઇન્જેક્શન ખૂબ મોડું — નિકાસ ચળવળ સુધી બળ્યા વગર</li>
+              <li>ઠંડક પ્રવાહી ભળે — હેડ ગૅસ્કેટ ખોટો — વરાળ</li>
+              <li>ઓછી ક્ષમતા ઇંધણ — દહન ધીમું</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-test">🔧 ટેસ્ટ</span><h3>બૉશ ટેસ્ટ બેન્ચ ચકાસણી</h3></div>
+      <div class="section-body">
+        <div class="test-list">
+          <div class="test-item"><div class="test-name">છંટકાવ પ્રવાહ</div><div class="test-desc">બૉશ EPS 708 ઓપ્ટિકલ — સરખો ઝાકળ ટોળ — ટૂટ્યો = નોઝલ બદલો.</div></div>
+          <div class="test-item"><div class="test-name">ઇંધણ વહેવ</div><div class="test-desc">૩૦૦/૮૦૦/૧૨૦૦/૧૬૦૦ બાર — વધારે = નોઝલ ઘસાઈ (કાળો ધુમાડો).</div></div>
+          <div class="test-item"><div class="test-name">પાછું ઇંધણ</div><div class="test-desc">સફેદ ધુમાડો = ઘણી વાર ઘણું વધારે પાછું ઇંધણ.</div></div>
+          <div class="test-item"><div class="test-name">ઇન્જેક્શન ડિગ્રી</div><div class="test-desc">ટોચ બિંદુ — ±૦.૫° ચોકસાઈ — સફેદ = મોડું, કાળો = વહેલું.</div></div>
+          <div class="test-item"><div class="test-name">ટીપું ચકાસો</div><div class="test-desc">ઇન્જેક્ટર ટોચ ૩૦ સેકન્ડ સૂકી — ટીપું = સફેદ ધુમાડો સ્ત્રોત.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-result">✅ પ્રમાણ</span><h3>અપેક્ષિત પરિણામ</h3></div>
+      <div class="section-body">
+        <div class="result-box">
+          ઓપ્ટિકલ છંટકાવ ચકાસો <span class="highlight">અને</span> ઇંધણ સંતુલન — બંને ભેગા = ધુમાડાનો <span class="highlight">ચોક્કસ સ્ત્રોત</span> — કાળો: નોઝલ/ટાઇમ — સફેદ: ટીપું/ઠંડક.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ વધારે ડીઝલ -->
+  <div class="panel" id="panel-4">
+    <div class="panel-header">
+      <div class="panel-icon">⛽</div>
+      <div>
+        <h2>વધારે ડીઝલ વપરાશ</h2>
+        <p>કિ.મી./લિ. ઓછો — ઇન્જેક્ટર ટેસ્ટ બેન્ચ ક્યારે ગયા? — ૧૫–૨૫% ઇંધણ બચત સક્ષમ</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-cause">📌 કારણો</span><h3>વધારે ઇંધણ વપરાશના કારણો</h3></div>
+      <div class="section-body">
+        <div class="cause-list">
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્ટર વધારે ઇંધણ:</strong> નોઝલ છિદ્ર ઘસાઈ — ઇંધણ વધારે ઇન્જેક્ટ.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્ટર ટપકવું:</strong> દહન ચળ. અંતે નોઝલ ટોચ બંધ ન — વધારાનું ટીપું.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>પ્રારંભ ઇન્જેક્શન ઘણું:</strong> પ્રારંભ દહન ભાર વધારે — ઇંધણ બગાડ.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઇન્જેક્ટર અટકી ખુલ્લો:</strong> આંશિક ખુલ્લો વાલ્વ — સતત ઝમવું.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>પંપ માપ ખોટું:</strong> મહ. ઇંધ. સ્ક્રૂ ઢીલું — ચળ. વધારે.</div></div>
+          <div class="cause-item"><div class="cause-dot"></div><div class="cause-text"><strong>ઊ.દ. પંપ સીલ ઘસાઈ:</strong> અંદરથી ઇંધણ પાછું — દબાણ ઓછું.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-test">🔧 ટેસ્ટ</span><h3>બૉશ ટેસ્ટ બેન્ચ ચકાસણી</h3></div>
+      <div class="section-body">
+        <div class="test-list">
+          <div class="test-item"><div class="test-name">સં. ભાર ઇ. ફ્લો</div><div class="test-desc">૧૦૦ ચળ. બૉશ ±૨% — વધારે = ઇ. ઘટાડો, નોઝલ બદલો.</div></div>
+          <div class="test-item"><div class="test-name">ટપકવું ચ.</div><div class="test-desc">ઇ.ચ. પછી ટોચ ૧૦ સેકન્ડ, ૧૫૦ બ. — ભીની ટોચ = ઇ. ટ. ગળે.</div></div>
+          <div class="test-item"><div class="test-name">ઓ. ઝ. ઇ.</div><div class="test-desc">ઓ. ઝ. RPM — ૨–૫ cc/ચળ. — વધારે = ઇ. બ.</div></div>
+          <div class="test-item"><div class="test-name">પ્રારંભ ઇ. માત્રા</div><div class="test-desc">સ. રૂ-ર. — ૧–૨ mg — ઓ.-વ. = ઇ. ઘટે.</div></div>
+          <div class="test-item"><div class="test-name">પાછું ઇ. ચ.</div><div class="test-desc">મ. ભ. — ધ. — વ. = ઇ. ક. ટ. વ. પ.</div></div>
+          <div class="test-item"><div class="test-name">ઇ. સ. કોડ</div><div class="test-desc">ક્ર. ઇ. — ચ. સ. ECU — ન. હ. = ખ. ડ.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><span class="badge badge-result">✅ પ્રમાણ</span><h3>અપેક્ષિત પરિણામ</h3></div>
+      <div class="section-body">
+        <div class="result-box">
+          ૩,૦૦,૦૦૦ કિ.મી.+ સારી સાચવણી — નિયમિત ટેસ્ટ બેન્ચ માપ = <span class="highlight">ઇંધણ ૧૫–૨૫% બચત</span> — ટ્રિમ + ટ.ચ. = ઇ. ઇ. ઓ.
+        </div>
+      </div>
+    </div>
+
+    <div class="models-bar">
+      <span>બૉ.ટ.બ. :</span>
+      <span class="model-tag">EPS 205</span>
+      <span class="model-tag">EPS 708</span>
+      <span class="model-tag">DCI 200</span>
+      <span class="model-tag">EFEP 385A</span>
+      <span class="model-tag">EPS 270</span>
+      <span class="model-tag">EFEP 515</span>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  function showTab(n) {
+    document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === n));
+    document.querySelectorAll('.panel').forEach((p, i) => p.classList.toggle('active', i === n));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
